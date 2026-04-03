@@ -1,0 +1,28 @@
+name: Bullion Hourly Notify
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+  workflow_dispatch:
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Run bullion notifier
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          GOLD_API_URL: ${{ secrets.GOLD_API_URL }}
+          SILVER_API_URL: ${{ secrets.SILVER_API_URL }}
+          FOREX_API_URL: ${{ secrets.FOREX_API_URL }}
+          OUNCE_TO_GRAM: ${{ secrets.OUNCE_TO_GRAM }}
+          GST_MULTIPLIER: ${{ secrets.GST_MULTIPLIER }}
+        run: bun index.js
