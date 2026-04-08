@@ -38,12 +38,14 @@ function buildMessage({ goldUSD, silverUSD, usdInr, updatedAt }) {
 
   const dateObj = new Date(updatedAt);
   const formattedDate = dateObj.toLocaleDateString("en-GB", {
+    timeZone: "Asia/Kolkata",
     day: "2-digit",
     month: "short",
     year: "numeric",
   });
   const formattedTime = dateObj
     .toLocaleTimeString("en-IN", {
+      timeZone: "Asia/Kolkata",
       hour: "2-digit",
       minute: "2-digit",
       hour12: true,

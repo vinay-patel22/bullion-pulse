@@ -2,7 +2,7 @@ name: Bullion Hourly Notify
 
 on:
   schedule:
-    - cron: "0 * * * *"
+    - cron: "0 * * * 1-5"
   workflow_dispatch:
 
 jobs:
@@ -12,13 +12,9 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
-        with:
-          persist-credentials: false
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: latest
 
       - name: Run bullion notifier
         env:
